@@ -1,73 +1,148 @@
-<?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" default-locale="en-US">
-  <info>
-    <title>Act-Ost (Corregido)</title>
-    <id>http://www.zotero.org/styles/act-ost-corrected</id>
-    <link href="http://www.zotero.org/styles/act-ost-corrected" rel="self"/>
-    <author>
-      <name>Adaptado por Mercedes</name>
-    </author>
-    <category citation-format="author-date"/>
-    <updated>2025-12-01T00:00:00+00:00</updated>
-  </info>
-
-  <!-- Macros -->
-  <macro name="author">
-    <names variable="author">
-      <name form="long" and="text" delimiter=", "/>
-    </names>
-  </macro>
-
-  <macro name="editor">
-    <names variable="editor">
-      <name form="long" and="text" delimiter=", "/>
-      <label form="short" prefix=" (" suffix=")"/>
-    </names>
-  </macro>
-
-  <macro name="title">
-    <text variable="title"/>
-  </macro>
-
-  <macro name="access">
-    <choose>
-      <if variable="URL">
-        <text variable="URL"/>
-        <date form="text" variable="accessed" prefix=" (" suffix=")">
-          <date-part name="day"/>
-          <date-part name="month"/>
-          <date-part name="year"/>
-        </date>
-      </if>
-    </choose>
-  </macro>
-
-  <!-- Citation -->
-  <citation>
-    <layout prefix="(" suffix=")" delimiter="; ">
-      <text macro="author"/>
-      <date variable="issued">
-        <date-part name="year"/>
-      </date>
-    </layout>
-  </citation>
-
-  <!-- Bibliography -->
-  <bibliography>
-    <layout suffix=".">
-      <group delimiter=". ">
-        <text macro="author"/>
-        <date variable="issued">
-          <date-part name="year"/>
-        </date>
-        <text macro="title"/>
-        <text macro="editor"/>
-        <text variable="container-title"/>
-        <text variable="volume"/>
-        <text variable="issue"/>
-        <text variable="page"/>
-        <text macro="access"/>
-      </group>
-    </layout>
-  </bibliography>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" et-al-min="7" et-al-use-first="3" demote-non-dropping-particle="sort-only" default-locale="en-GB">
+<info>
+<title>Actualizaciones en Osteologìa - Mercedes Lombarte</title>
+<title-short>Act Ost</title-short>
+<id>http://csl.mendeley.com/styles/461744481/Act-Ost</id>
+<contributor>
+<name>Mercedes Lombarte</name>
+<uri/>
+</contributor>
+<category citation-format="numeric"/>
+<category field="medicine"/>
+<updated>2025-11-26T16:48:10+00:00</updated>
+<rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+</info>
+<macro name="editor">
+<names variable="editor">
+<name name-as-sort-order="all" sort-separator=" " initialize-with="" delimiter=", " delimiter-precedes-last="always"/>
+<label form="short" strip-periods="true" prefix="(" suffix=")."/>
+</names>
+</macro>
+<macro name="anon">
+<text term="anonymous" form="short" text-case="capitalize-first" strip-periods="true"/>
+</macro>
+<macro name="author">
+<group suffix=".">
+<names variable="author">
+<name delimiter-precedes-last="always" et-al-min="7" et-al-use-first="3" initialize-with="" name-as-sort-order="all" sort-separator=" "/>
+<label form="short" prefix=" " strip-periods="true"/>
+<substitute>
+<names variable="editor"/>
+<text macro="anon"/>
+</substitute>
+</names>
+</group>
+</macro>
+<macro name="access">
+<choose>
+<if variable="URL">
+<text value="" suffix=" "/>
+<text variable="URL"/>
+<group prefix=" ">
+<text value="" text-case="capitalize-first" suffix=" "/>
+<date form="text" variable="accessed" prefix="(" suffix=")">
+<date-part name="month" range-delimiter="" suffix=" "/>
+<date-part name="day" range-delimiter=""/>
+<date-part name="day" range-delimiter=""/>
+</date>
+</group>
+</if>
+</choose>
+</macro>
+<macro name="title">
+<text variable="title"/>
+</macro>
+<macro name="publisher">
+<group delimiter=": ">
+<text variable="publisher-place"/>
+<text variable="publisher" suffix=", "/>
+</group>
+</macro>
+<macro name="edition">
+<choose>
+<if is-numeric="edition">
+<group delimiter=" ">
+<number variable="edition" form="ordinal"/>
+<text term="edition" form="short"/>
+</group>
+</if>
+<else>
+<text variable="edition" suffix="."/>
+</else>
+</choose>
+</macro>
+<citation collapse="citation-number">
+<sort>
+<key variable="citation-number"/>
+</sort>
+<layout delimiter="," vertical-align="sup">
+<text variable="citation-number"/>
+<group prefix="(" suffix=")">
+<label variable="locator" form="short" strip-periods="true"/>
+<text variable="locator"/>
+</group>
+</layout>
+</citation>
+<bibliography hanging-indent="false" et-al-min="7" et-al-use-first="6">
+<layout>
+<text variable="citation-number" suffix=". "/>
+<text macro="author"/>
+<choose>
+<if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+<group suffix="." delimiter=",">
+<text macro="title"/>
+<text macro="edition" prefix=" "/>
+<text macro="editor" prefix=" "/>
+</group>
+<text prefix=" " macro="publisher"/>
+<group suffix=".">
+<date variable="issued">
+<date-part name="year"/>
+</date>
+<text variable="page" prefix=":"/>
+</group>
+</if>
+<else-if type="chapter paper-conference" match="any">
+<text macro="title" prefix=" " suffix="."/>
+<group prefix=" ">
+<text term="in" text-case="capitalize-first" suffix=": "/>
+<text macro="editor"/>
+<text variable="container-title" prefix=" " suffix="."/>
+<text variable="volume" prefix="Vol " suffix="."/>
+<text macro="edition" prefix=" "/>
+<text variable="collection-title" prefix=" " suffix="."/>
+<group suffix=".">
+<text macro="publisher" prefix=" "/>
+<group suffix=".">
+<date date-parts="year" variable="issued" suffix=", ">
+<date-part name="year"/>
+</date>
+<text variable="page" form="short" prefix="p. "/>
+</group>
+</group>
+</group>
+</else-if>
+<else>
+<group suffix=".">
+<text macro="title" prefix=" "/>
+<text macro="editor" prefix=" "/>
+</group>
+<group prefix=" " suffix=".">
+<text variable="container-title" form="short" suffix="."/>
+<group delimiter="; " prefix=" ">
+<date variable="issued">
+<date-part name="year"/>
+</date>
+<group>
+<text variable="volume"/>
+<text variable="issue" prefix="(" suffix=")"/>
+</group>
+</group>
+<text variable="page" prefix=": "/>
+</group>
+</else>
+</choose>
+<text macro="access" prefix=" "/>
+</layout>
+</bibliography>
 </style>
